@@ -1,40 +1,19 @@
 import { motion } from "framer-motion";
 import { Monitor, Settings, Headphones, RefreshCw, Database, ShieldCheck } from "lucide-react";
-
-const services = [
-  {
-    icon: Monitor,
-    title: "Device Provisioning",
-    description: "Complete Odoo 17 installation and configuration on all your hardware — desktops, tablets, POS terminals, and more.",
-  },
-  {
-    icon: Settings,
-    title: "Custom Configuration",
-    description: "Tailored modules, workflows, and integrations designed around your unique business processes.",
-  },
-  {
-    icon: Database,
-    title: "Data Migration",
-    description: "Seamless migration from legacy systems with zero data loss. We handle the complexity so you don't have to.",
-  },
-  {
-    icon: RefreshCw,
-    title: "Updates & Patches",
-    description: "Regular system updates, security patches, and module upgrades to keep your ERP running at peak performance.",
-  },
-  {
-    icon: Headphones,
-    title: "24/7 Support",
-    description: "Round-the-clock technical support with dedicated account managers and guaranteed response times.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Security & Compliance",
-    description: "Enterprise-grade security configurations, backups, and compliance auditing built into every deployment.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+
+  const services = [
+    { icon: Monitor, titleKey: "services.s1.title", descKey: "services.s1.desc" },
+    { icon: Settings, titleKey: "services.s2.title", descKey: "services.s2.desc" },
+    { icon: Database, titleKey: "services.s3.title", descKey: "services.s3.desc" },
+    { icon: RefreshCw, titleKey: "services.s4.title", descKey: "services.s4.desc" },
+    { icon: Headphones, titleKey: "services.s5.title", descKey: "services.s5.desc" },
+    { icon: ShieldCheck, titleKey: "services.s6.title", descKey: "services.s6.desc" },
+  ];
+
   return (
     <section className="py-24 relative" id="services">
       <div className="container px-6">
@@ -44,17 +23,15 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">What We Do</span>
-          <h2 className="text-4xl md:text-5xl font-bold font-display mt-3">End-to-End ERP Services</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mt-4 text-lg">
-            From initial provisioning to long-term support, we cover every step of your Odoo 17 journey.
-          </p>
+          <span className="text-primary text-sm font-semibold tracking-widest uppercase">{t("services.label")}</span>
+          <h2 className="text-4xl md:text-5xl font-bold font-display mt-3">{t("services.title")}</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto mt-4 text-lg">{t("services.subtitle")}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <motion.div
-              key={service.title}
+              key={service.titleKey}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -64,8 +41,8 @@ const ServicesSection = () => {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                 <service.icon className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold font-display mb-3">{service.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              <h3 className="text-xl font-semibold font-display mb-3">{t(service.titleKey)}</h3>
+              <p className="text-muted-foreground leading-relaxed">{t(service.descKey)}</p>
             </motion.div>
           ))}
         </div>

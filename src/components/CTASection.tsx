@@ -6,22 +6,24 @@ import { Label } from "@/components/ui/label";
 import { ArrowRight, Mail, Phone, User, Send } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CTASection = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      toast({ title: "Please fill in all required fields", variant: "destructive" });
+      toast({ title: t("cta.fillFields"), variant: "destructive" });
       return;
     }
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      toast({ title: "Message sent!", description: "We'll get back to you within 24 hours." });
+      toast({ title: t("cta.sent"), description: t("cta.sentDesc") });
       setForm({ name: "", email: "", phone: "", message: "" });
     }, 1000);
   };
@@ -37,11 +39,9 @@ const CTASection = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-              Ready to Deploy <span className="gradient-text">Odoo 17</span>?
+              {t("cta.title1")} <span className="gradient-text">Odoo 17</span>{t("cta.title2")}
             </h2>
-            <p className="text-muted-foreground text-lg max-w-lg mx-auto">
-              Let's discuss your ERP needs and build a deployment plan tailored to your business.
-            </p>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto">{t("cta.subtitle")}</p>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-8 md:p-12 glow-box relative overflow-hidden">
@@ -49,11 +49,11 @@ const CTASection = () => {
             <form onSubmit={handleSubmit} className="relative z-10 grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-foreground flex items-center gap-2">
-                  <User className="w-4 h-4 text-primary" /> Name <span className="text-destructive">*</span>
+                  <User className="w-4 h-4 text-primary" /> {t("cta.name")} <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="name"
-                  placeholder="Your full name"
+                  placeholder={t("cta.namePlaceholder")}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   maxLength={100}
@@ -63,7 +63,7 @@ const CTASection = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-foreground flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-primary" /> Email <span className="text-destructive">*</span>
+                  <Mail className="w-4 h-4 text-primary" /> {t("cta.email")} <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="email"
@@ -78,12 +78,12 @@ const CTASection = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="phone" className="text-foreground flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-primary" /> Phone
+                  <Phone className="w-4 h-4 text-primary" /> {t("cta.phone")}
                 </Label>
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="+1 (555) 000-0000"
+                  placeholder="+49 (0) 123 456789"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   maxLength={20}
@@ -93,11 +93,11 @@ const CTASection = () => {
 
               <div className="md:col-span-2 space-y-2">
                 <Label htmlFor="message" className="text-foreground flex items-center gap-2">
-                  <Send className="w-4 h-4 text-primary" /> Message <span className="text-destructive">*</span>
+                  <Send className="w-4 h-4 text-primary" /> {t("cta.message")} <span className="text-destructive">*</span>
                 </Label>
                 <Textarea
                   id="message"
-                  placeholder="Tell us about your project, current setup, and what you need..."
+                  placeholder={t("cta.messagePlaceholder")}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   maxLength={1000}
@@ -113,7 +113,7 @@ const CTASection = () => {
                   disabled={isSubmitting}
                   className="text-base px-10 py-6 font-semibold gap-2 group"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? t("cta.sending") : t("cta.submit")}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>
