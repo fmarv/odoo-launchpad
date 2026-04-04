@@ -58,6 +58,7 @@ const translations: Record<string, Record<Language, string>> = {
     en: "Ready to get started? Tell us about your project and we'll create a tailored plan for your business.",
     de: "Bereit loszulegen? Erzählt uns von eurem Projekt und wir erstellen einen maßgeschneiderten Plan.",
   },
+  "journey.featured": { en: "Start Here", de: "Hier starten" },
   "journey.contact.cta": { en: "Contact Us", de: "Jetzt anfragen" },
 
   // Services
