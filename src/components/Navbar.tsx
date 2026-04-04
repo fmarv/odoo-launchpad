@@ -3,37 +3,50 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Cpu } from "lucide-react";
 import LanguageToggle from "@/components/LanguageToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { label: t("nav.services"), href: "#services" },
-    { label: t("nav.process"), href: "#process" },
-    { label: t("nav.contact"), href: "#contact" },
+    { label: t("nav.services"), href: "/leistungen" },
+    { label: t("nav.pricing"), href: "/preise" },
+    { label: t("nav.whyErp"), href: "/warum-erp" },
+    { label: t("nav.contact"), href: "/kontakt" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container px-6 flex items-center justify-between h-16">
-        <a href="/" className="flex items-center gap-2 font-display font-bold text-xl">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 font-display font-bold text-xl"
+        >
           <Cpu className="w-6 h-6 text-primary" />
-          <span>ERPDeploy</span>
-        </a>
+          <span>Ralphun</span>
+        </button>
 
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
+            <button
               key={item.href}
-              href={item.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              onClick={() => navigate(item.href)}
+              className={`text-sm transition-colors ${
+                location.pathname === item.href
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {item.label}
-            </a>
+            </button>
           ))}
           <LanguageToggle />
-          <Button size="sm" className="font-semibold">{t("nav.getStarted")}</Button>
+          <Button size="sm" className="font-semibold" onClick={() => navigate("/kontakt")}>
+            {t("nav.getStarted")}
+          </Button>
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
@@ -47,16 +60,21 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden border-t border-border bg-background px-6 py-4 space-y-3">
           {navItems.map((item) => (
-            <a
+            <button
               key={item.href}
-              href={item.href}
-              className="block text-sm text-muted-foreground hover:text-foreground"
-              onClick={() => setOpen(false)}
+              className={`block text-sm w-full text-left ${
+                location.pathname === item.href
+                  ? "text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              onClick={() => { navigate(item.href); setOpen(false); }}
             >
               {item.label}
-            </a>
+            </button>
           ))}
-          <Button size="sm" className="w-full font-semibold mt-2">{t("nav.getStarted")}</Button>
+          <Button size="sm" className="w-full font-semibold mt-2" onClick={() => { navigate("/kontakt"); setOpen(false); }}>
+            {t("nav.getStarted")}
+          </Button>
         </div>
       )}
     </nav>

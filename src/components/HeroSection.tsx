@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -24,7 +26,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-6 leading-[1.1]">
-            {t("hero.title1")} <span className="gradient-text">Odoo 17 ERP</span> {t("hero.title2")}
+            {t("hero.title1")} <span className="gradient-text">Excel-Chaos.</span> {t("hero.title2")}
             <br />{t("hero.title3")}
           </h1>
 
@@ -33,11 +35,11 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="text-base px-8 py-6 font-semibold gap-2 group">
+            <Button size="lg" className="text-base px-8 py-6 font-semibold gap-2 group" onClick={() => navigate("/kontakt")}>
               {t("hero.cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="text-base px-8 py-6 font-semibold">
+            <Button variant="outline" size="lg" className="text-base px-8 py-6 font-semibold" onClick={() => navigate("/leistungen")}>
               <Shield className="w-4 h-4 mr-2" />
               {t("hero.cta2")}
             </Button>
