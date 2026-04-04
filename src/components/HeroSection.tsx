@@ -26,7 +26,7 @@ const HeroSection = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold font-display tracking-tight mb-6 leading-[1.1]">
-            {t("hero.title1")} <span className="gradient-text">Odoo 17 ERP</span> {t("hero.title2")}
+            {t("hero.title1")} <span className="gradient-text">Excel-Chaos.</span> {t("hero.title2")}
             <br />{t("hero.title3")}
           </h1>
 
