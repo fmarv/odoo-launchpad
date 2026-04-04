@@ -35,11 +35,11 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="text-base px-8 py-6 font-semibold gap-2 group">
+            <Button size="lg" className="text-base px-8 py-6 font-semibold gap-2 group" onClick={() => navigate("/kontakt")}>
               {t("hero.cta1")}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="outline" size="lg" className="text-base px-8 py-6 font-semibold">
+            <Button variant="outline" size="lg" className="text-base px-8 py-6 font-semibold" onClick={() => navigate("/leistungen")}>
               <Shield className="w-4 h-4 mr-2" />
               {t("hero.cta2")}
             </Button>
