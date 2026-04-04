@@ -5,6 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index.tsx";
+import Leistungen from "./pages/Leistungen.tsx";
+import Preise from "./pages/Preise.tsx";
+import WarumERP from "./pages/WarumERP.tsx";
+import Kontakt from "./pages/Kontakt.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -18,6 +22,10 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/leistungen" element={<Leistungen />} />
+            <Route path="/preise" element={<Preise />} />
+            <Route path="/warum-erp" element={<WarumERP />} />
+            <Route path="/kontakt" element={<Kontakt />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
